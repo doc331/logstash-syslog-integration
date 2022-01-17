@@ -1,0 +1,1 @@
+%{WORD:event.typ}\s*%{USER}\s%{WORD:event.action}:\s(%{WORD:network.direction}|<%{WORD:network.direction}>)(\|)(%{WORD:network.transport}|)(\|)(%{USER:source.interface}|)(\|)(%{IP:source.ip}|)(\|)(%{INT:source.port}|)(\|)(%{MAC:source.mac}|)(\|)(%{IP:destination.ip}|)(\|)(%{INT:destination.port}|)(\|)
