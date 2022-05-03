@@ -1,0 +1,61 @@
+##header
+<%{[log][syslog][priority]}>%{[event][created]} %{+[event][created]}:%{+[event][created]}:%{+[event][created]} %{[observer][name]} %{?}/%{?}/%{?}/%{[event][dataset]}_%{[event][module]}:  %{[msg1]}
+
+##Firewall_Activity
+%{[event][typ]->} %{[host][name]} %{[event][action]}: %{[network][direction]}|%{[network][transport]}|%{[source][interface]}|%{[source][ip]}|%{[source][port]}|%{[source][mac]}|%{[destination][ip]}|%{[destination][port]}|%{[network][protocol]}|%{[destination][interface]}|%{[rule][name]}|%{[process][pid]}|%{[source][nat][ip]}|%{[destination][nat][ip]}|%{[event][duration]}|%{[process][args_count]}|%{[destination][bytes]}|%{[source][bytes]}|%{[destination][packets]}|%{[source][packets]}|%{[user][name]}|%{[network][protocol]}|%{[network][application]}|%{[http][request][referrer]}|%{[http][request][body][content]}|%{[http][response][body][content]}
+
+%{[event][typ]->} %{[host][name]} %{[event][action]}:
+
+##ecs
+
+event.category
+authentication, configuration, database, driver, email, file, host, iam, intrusion_detection, malware, network, package, process, registry, session, threat, web
+
+Expected event types for category network: access, allowed, connection, denied, end, info, protocol, start
+
+event.type 
+access, admin, allowed, change, connection, creation, deletion, denied, end, error, group, indicator, info, installation, protocol, start, user
+
+
+
+type     Devicename Action: type|proto|srcIF|srcIP|srcPort|srcMAC|dstIP|dstPort|dstIF|dstService|rule|Info|srcNAT|dstNAT|duration|count|receivedBytes|sentBytes|receivedPackets|sentPackets|user|protocol|application|target|content|urlcat
+%{[event][action]}: %{[network][direction]}|%{[network][transport]}|%{[source][interface]}|%{[source][ip]}|%{[source][port]}|%{[source][mac]}|%{[destination][ip]}|%{[destination][port]}|%{[network][protocol]}|%{[destination][interface]}|%{[rule][name]}|%{[process][pid]}|%{[source][nat][ip]}|%{[destination][nat][ip]}|%{[event][duration]}|%{[process][args_count]}|%{[destination][bytes]}|%{[source][bytes]}|%{[destination][packets]}|%{[source][packets]}|%{[user][name]}|%{[network][protocol]}|%{[network][application]}|%{[http][request][referrer]}|%{[http][request][body][content]}|%{[http][response][body][content]}
+
+[event][typ] Type  – Information about the Type of log entry. E.g. Security or Info
+[host][name] Devicename
+[event][action] Action – Information about the action taken according to the firewall ruse set configuration.
+type  – Information about the origin type of traffic and ruleset used.
+	LIN – Local In. The incoming traffic on the host firewall.
+	LOUT – Local Out. The outgoing traffic from the host firewall.
+	LB – Loopback. The traffic via the loopback interface.
+	FWD – Forwarding. The outbound traffic via the forwarding firewall.
+	IFWD – Inbound Forwarding. The inbound traffic to the firewall.
+	PXY – Proxy. The outbound traffic via the proxy.
+	IPXY – Inbound Proxy. The inbound traffic via the proxy.
+	TAP – Transparent Application Proxying. The traffic via stream forwarding.
+	LRD – Local Redirect. Redirected traffic configured in forwarding ruleset.
+proto –The protocol that was used. For example, TCP, UDP, or ICMP.
+srcIF – The source network interface of the session.
+srcIP – The source IP address of the session.
+srcPort – The source port of the session.
+srcMAC – The MAC address of the session's source network interface.
+dstIP – The destination IP address of the session.
+dstPort – The destination port of the session.
+dstService – The destination service of the session.
+dstIF – The destination network interface of the session.
+rule – The name of the firewall rule processing the session.
+Info – Operational information for the session.
+srcNAT – Source NAT address of the session.
+dstNAT – Destination NAT address of the session.
+duration – Duration of the session.
+count – Number of sessions processed.
+receivedBytes – Received traffic of a session in bytes.
+sentBytes – Sent traffic of a session in bytes.
+receivedPackets – Received traffic of a session in packets.
+sentPackets – Received traffic of a session in packets.
+user – The name of the user, if the session was handled by a firewall rule that requires authentication.
+protocol – The protocol of a session. For example, TCP, UDP, or ICMP.
+application – The application context of a session.
+target – The application target.
+content – The application content.
+urlcat – The URL category the session belongs to.
