@@ -1,3 +1,5 @@
+###dissect###
+
 ##header
 <%{[log][syslog][priority]}>%{[event][created]} %{+[event][created]}:%{+[event][created]}:%{+[event][created]} %{[observer][name]} %{?}/%{?}/%{?}/%{[event][dataset]}_%{[event][module]}:  %{[msg1]}
 
@@ -19,12 +21,12 @@ access, admin, allowed, change, connection, creation, deletion, denied, end, err
 
 
 type     Devicename Action: type|proto|srcIF|srcIP|srcPort|srcMAC|dstIP|dstPort|dstIF|dstService|rule|Info|srcNAT|dstNAT|duration|count|receivedBytes|sentBytes|receivedPackets|sentPackets|user|protocol|application|target|content|urlcat
-%{[event][action]}: %{[network][direction]}|%{[network][transport]}|%{[source][interface]}|%{[source][ip]}|%{[source][port]}|%{[source][mac]}|%{[destination][ip]}|%{[destination][port]}|%{[network][protocol]}|%{[destination][interface]}|%{[rule][name]}|%{[process][pid]}|%{[source][nat][ip]}|%{[destination][nat][ip]}|%{[event][duration]}|%{[process][args_count]}|%{[destination][bytes]}|%{[source][bytes]}|%{[destination][packets]}|%{[source][packets]}|%{[user][name]}|%{[network][protocol]}|%{[network][application]}|%{[http][request][referrer]}|%{[http][request][body][content]}|%{[http][response][body][content]}
+%{[source][nat][ip]}|%{[destination][nat][ip]}|%{[event][duration]}|%{[process][args_count]}|%{[destination][bytes]}|%{[source][bytes]}|%{[destination][packets]}|%{[source][packets]}|%{[user][name]}|%{[network][protocol]}|%{[network][application]}|%{[http][request][referrer]}|%{[http][request][body][content]}|%{[http][response][body][content]}
 
 [event][typ] Type  – Information about the Type of log entry. E.g. Security or Info
 [host][name] Devicename
-[event][action] Action – Information about the action taken according to the firewall ruse set configuration.
-type  – Information about the origin type of traffic and ruleset used.
+[event][action] -> add [event][type] -> denied Action – Information about the action taken according to the firewall ruse set configuration.
+[network][direction] type  – Information about the origin type of traffic and ruleset used.
 	LIN – Local In. The incoming traffic on the host firewall.
 	LOUT – Local Out. The outgoing traffic from the host firewall.
 	LB – Loopback. The traffic via the loopback interface.
@@ -34,19 +36,19 @@ type  – Information about the origin type of traffic and ruleset used.
 	IPXY – Inbound Proxy. The inbound traffic via the proxy.
 	TAP – Transparent Application Proxying. The traffic via stream forwarding.
 	LRD – Local Redirect. Redirected traffic configured in forwarding ruleset.
-proto –The protocol that was used. For example, TCP, UDP, or ICMP.
-srcIF – The source network interface of the session.
-srcIP – The source IP address of the session.
-srcPort – The source port of the session.
-srcMAC – The MAC address of the session's source network interface.
-dstIP – The destination IP address of the session.
-dstPort – The destination port of the session.
-dstService – The destination service of the session.
-dstIF – The destination network interface of the session.
-rule – The name of the firewall rule processing the session.
-Info – Operational information for the session.
-srcNAT – Source NAT address of the session.
-dstNAT – Destination NAT address of the session.
+[network][transport] proto –The protocol that was used. For example, TCP, UDP, or ICMP.
+[source][interface] ??? srcIF – The source network interface of the session.
+[source][ip] srcIP – The source IP address of the session.
+[source][port] srcPort – The source port of the session.
+[source][mac] srcMAC – The MAC address of the session's source network interface.
+[destination][ip] dstIP – The destination IP address of the session.
+[destination][port] dstPort – The destination port of the session.
+[network][protocol] ??? network.application ??? dstService – The destination service of the session.
+[destination][interface] dstIF – The destination network interface of the session.
+[rule][name] rule – The name of the firewall rule processing the session.
+[process][pid] ??? Info – Operational information for the session.
+[source][nat][ip] srcNAT – Source NAT address of the session.
+[destination][nat][ip] dstNAT – Destination NAT address of the session.
 duration – Duration of the session.
 count – Number of sessions processed.
 receivedBytes – Received traffic of a session in bytes.
