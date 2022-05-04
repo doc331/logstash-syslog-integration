@@ -1,0 +1,12 @@
+filter {
+  ### barracuda firewall  ###
+  if [type] == "barracuda" {
+    mutate {
+      add_tag => "network"
+	  add_field => [ "[observer][type]", "firewall" ]
+      add_field => [ "[observer][product]", "barracuda" ]
+#      add_field => { "[event][category]" => "network" }
+#      rename => { "host" => "[observer][ip]" }
+    }
+  }
+}
