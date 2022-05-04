@@ -1,10 +1,10 @@
 ###dissect###
 
 ##header
-<%{[log][syslog][priority]}>%{[event][created]} %{+[event][created]}:%{+[event][created]}:%{+[event][created]} %{[observer][name]} %{?}/%{?}/%{?}/%{[event][dataset]}_%{[event][module]}:  %{[msg1]}
+<%{[log][syslog][priority]}>%{[event][created]} %{+[event][created]}:%{+[event][created]}:%{+[event][created]} %{[observer][name]} %{?}/%{?}/%{?}/%{[event][dataset]}_%{[event][module]}:  %{[cuda_filter]}
 
 ##Firewall_Activity
-%{[event][typ]->} %{[host][name]} %{[event][action]}: %{[network][direction]}|%{[network][transport]}|%{[source][interface]}|%{[source][ip]}|%{[source][port]}|%{[source][mac]}|%{[destination][ip]}|%{[destination][port]}|%{[network][protocol]}|%{[destination][interface]}|%{[rule][name]}|%{[process][pid]}|%{[source][nat][ip]}|%{[destination][nat][ip]}|%{[event][duration]}|%{[process][args_count]}|%{[destination][bytes]}|%{[source][bytes]}|%{[destination][packets]}|%{[source][packets]}|%{[user][name]}|%{[network][protocol]}|%{[network][application]}|%{[http][request][referrer]}|%{[http][request][body][content]}|%{[http][response][body][content]}
+%{[event][typ]->} %{[host][name]} %{[event][action]}: %{[network][direction]}|%{[network][transport]}|%{[observer][ingress][interface][name]}|%{[source][ip]}|%{[source][port]}|%{[source][mac]}|%{[destination][ip]}|%{[destination][port]}|%{[service][environment]}|%{[observer][egress][interface][name]}|%{[rule][name]}|%{[process][pid]}|%{[source][nat][ip]}|%{[destination][nat][ip]}|%{[event][duration]}|%{[process][args_count]}|%{[destination][bytes]}|%{[source][bytes]}|%{[destination][packets]}|%{[source][packets]}|%{[user][name]}|%{[network][protocol]}|%{[network][application]}|%{[event][url]}|%{[http][request][body][content]}|%{[http][response][body][content]}
 
 %{[event][typ]->} %{[host][name]} %{[event][action]}:
 
@@ -23,7 +23,7 @@ access, admin, allowed, change, connection, creation, deletion, denied, end, err
 type     Devicename Action: type|proto|srcIF|srcIP|srcPort|srcMAC|dstIP|dstPort|dstIF|dstService|rule|Info|srcNAT|dstNAT|duration|count|receivedBytes|sentBytes|receivedPackets|sentPackets|user|protocol|application|target|content|urlcat
 
 
-[event][typ] Type  – Information about the Type of log entry. E.g. Security or Info
+[event][typ] -> !lowercase Type  – Information about the Type of log entry. E.g. Security or Info
 [host][name] Devicename
 [event][action] -> add [event][type] -> denied Action – Information about the action taken according to the firewall ruse set configuration.
 [network][direction] type  – Information about the origin type of traffic and ruleset used.
