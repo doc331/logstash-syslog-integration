@@ -21,7 +21,7 @@ access, admin, allowed, change, connection, creation, deletion, denied, end, err
 
 
 type     Devicename Action: type|proto|srcIF|srcIP|srcPort|srcMAC|dstIP|dstPort|dstIF|dstService|rule|Info|srcNAT|dstNAT|duration|count|receivedBytes|sentBytes|receivedPackets|sentPackets|user|protocol|application|target|content|urlcat
-%{[source][nat][ip]}|%{[destination][nat][ip]}|%{[event][duration]}|%{[process][args_count]}|%{[destination][bytes]}|%{[source][bytes]}|%{[destination][packets]}|%{[source][packets]}|%{[user][name]}|%{[network][protocol]}|%{[network][application]}|%{[http][request][referrer]}|%{[http][request][body][content]}|%{[http][response][body][content]}
+
 
 [event][typ] Type  – Information about the Type of log entry. E.g. Security or Info
 [host][name] Devicename
@@ -37,27 +37,31 @@ type     Devicename Action: type|proto|srcIF|srcIP|srcPort|srcMAC|dstIP|dstPort|
 	TAP – Transparent Application Proxying. The traffic via stream forwarding.
 	LRD – Local Redirect. Redirected traffic configured in forwarding ruleset.
 [network][transport] proto –The protocol that was used. For example, TCP, UDP, or ICMP.
-[source][interface] ??? srcIF – The source network interface of the session.
+[observer][ingress][interface][name] srcIF – The source network interface of the session.
 [source][ip] srcIP – The source IP address of the session.
 [source][port] srcPort – The source port of the session.
 [source][mac] srcMAC – The MAC address of the session's source network interface.
 [destination][ip] dstIP – The destination IP address of the session.
 [destination][port] dstPort – The destination port of the session.
-[network][protocol] ??? network.application ??? dstService – The destination service of the session.
-[destination][interface] dstIF – The destination network interface of the session.
+[service][environment] dstService – The destination service of the session.
+[observer][egress][interface][name] dstIF – The destination network interface of the session.
 [rule][name] rule – The name of the firewall rule processing the session.
-[process][pid] ??? Info – Operational information for the session.
+[process][pid] Info – Operational information for the session.
 [source][nat][ip] srcNAT – Source NAT address of the session.
 [destination][nat][ip] dstNAT – Destination NAT address of the session.
-duration – Duration of the session.
-count – Number of sessions processed.
-receivedBytes – Received traffic of a session in bytes.
-sentBytes – Sent traffic of a session in bytes.
-receivedPackets – Received traffic of a session in packets.
-sentPackets – Received traffic of a session in packets.
-user – The name of the user, if the session was handled by a firewall rule that requires authentication.
-protocol – The protocol of a session. For example, TCP, UDP, or ICMP.
-application – The application context of a session.
-target – The application target.
-content – The application content.
-urlcat – The URL category the session belongs to.
+[event][duration] duration – Duration of the session.
+[process][args_count]] count – Number of sessions processed.
+[destination][bytes] receivedBytes – Received traffic of a session in bytes.
+[source][bytes] sentBytes – Sent traffic of a session in bytes.
+[destination][packets] receivedPackets – Received traffic of a session in packets.
+[source][packets] sentPackets – Received traffic of a session in packets.
+[user][name] user – The name of the user, if the session was handled by a firewall rule that requires authentication.
+[network][protocol] protocol – The protocol of a session. For example, TCP, UDP, or ICMP.
+[network][application] application – The application context of a session.
+[event][url] target – The application target.
+[http][request][body][content] content – The application content.
+[http][response][body][content] urlcat – The URL category the session belongs to.
+
+
+
+<%{[log][syslog][priority]}>%{[event][created]} %{+[event][created]}:%{+[event][created]}:%{+[event][created]} %{[observer][name]} %{?}/%{?}/%{?}/%{[event][module]}:  %{[msg1]}
